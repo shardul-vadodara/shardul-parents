@@ -244,7 +244,16 @@
           }
         ],
         "parent_note_gu": "",
-        "files": []
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week3_savaj_kesari.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week3_savaj_kesari.png"
+          }
+        ]
       },
       "mrigendra_pundarik": {
         "summary_gu": "",
@@ -280,7 +289,16 @@
           }
         ],
         "parent_note_gu": "",
-        "files": []
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week3_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week3_mrigendra_pundarik.png"
+          }
+        ]
       }
     },
     "festivals_gu": [
