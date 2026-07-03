@@ -1,92 +1,36 @@
-# શાર્દૂલ શિશુ વિહાર — માતાપિતા પોર્ટલ (Parent Portal)
+# શાર્દૂલ શિશુ વિહાર — સાપ્તાહિક પ્રવૃત્તિ (Weekly Activity Portal)
 
-Static parent-facing portal for Shardul Shishu Vihar, Vadodara. Hosted on GitHub Pages.
+Single-purpose static site for Shardul Shishu Vihar, Vadodara: weekly activity
+access for parents and teachers, per age group. Hosted on GitHub Pages.
 
 **Live:** https://shardul-vadodara.github.io/shardul-parents/
 
-## What parents see
+## What it shows
 
-- **આ સપ્તાહ** — current week's plan per group (સાવજ-કેસરી / મૃગેન્દ્ર-પુંડરિક): summary, kriyakalapo, parent notes, festivals, downloads
-- **ગૃહકાર્ય** — homework per group with due dates and attachments
-- **પુસ્તકાલય** — library info and downloadable resources
-- **સૂચનાઓ** — announcements (pinned ones stay on top)
+One feature — the week's plan, browsable by week (‹ › navigation, current week
+auto-selected) and by group:
 
-## How to publish content
+- **સાવજ-કેસરી** (૩.૫-૫.૫ વર્ષ) and **મૃગેન્દ્ર-પુંડરિક** (૫.૫-૮ વર્ષ)
+- Per week: title, dates, main activities, ક્રિયાકલાપ (steps, materials,
+  mahatva), parent note, festivals, season note
+- Downloads: parent guide PDF / PNG per week (also useful for teachers)
 
-Everything is data-driven. Edit JSON files in `data/`, drop PDFs/PNGs into `files/`, commit, push. GitHub Pages redeploys automatically (~1 minute).
+## How content gets here
+
+Content is authored in the private `active-parents` repo using the unified
+planner tool (v4). The teacher clicks **પ્રકાશન પેકેજ સેવ કરો** which writes the
+backup JSON + parent PDF/PNG into that repo's `exports/` folder, then commits
+and pushes. A GitHub Action converts the data and pushes it here:
 
 ```
-data/
-  config.json         school info + groups (rarely changes)
-  weeks.json          weekly plans (append a new week object each week)
-  homework.json       homework entries
-  library.json        library info + resource list
-  announcements.json  announcements
-files/                published PDFs / PNGs (referenced by path from JSON)
+data/config.json   school info + groups
+data/weeks.json    published weeks (generated — do not hand-edit)
+files/             parent PDFs / PNGs (generated)
 ```
 
-### Adding a week (`data/weeks.json`)
+GitHub Pages redeploys automatically on every push (~1 minute).
 
-Append an object to the array. The site automatically shows the latest week whose `start_date` has arrived.
+## Constraints
 
-```json
-{
-  "week": 4,
-  "start_date": "2026-07-06",
-  "end_date": "2026-07-12",
-  "title_gu": "સપ્તાહ ૪",
-  "groups": {
-    "savaj_kesari": {
-      "summary_gu": "…",
-      "kriyakalapo": [ { "title": "…", "steps": ["…"], "mahatva": "…" } ],
-      "parent_note_gu": "…",
-      "files": [ { "label_gu": "માર્ગદર્શિકા PDF", "path": "files/week4_sk.pdf" } ]
-    },
-    "mrigendra_pundarik": { "summary_gu": "…", "kriyakalapo": [], "parent_note_gu": "", "files": [] }
-  },
-  "festivals_gu": ["…"],
-  "season_note_gu": "…"
-}
-```
-
-The `kriyakalapo` format matches the JSON exported by the private weekly PDF generator tools (`title`, `steps[]`, `mahatva`), so exports can be pasted in directly.
-
-### Homework (`data/homework.json`)
-
-```json
-{
-  "id": "hw-2026-07-08",
-  "date": "2026-07-08",
-  "group": "savaj_kesari",        // or "mrigendra_pundarik" or "all"
-  "title_gu": "…",
-  "details_gu": "…",
-  "due_date": "2026-07-12",
-  "files": [ { "label_gu": "વર્કશીટ", "path": "files/hw_week4.pdf" } ]
-}
-```
-
-### Announcements (`data/announcements.json`)
-
-```json
-{ "id": "ann-…", "date": "2026-07-08", "title_gu": "…", "details_gu": "…", "pinned": false }
-```
-
-### Library (`data/library.json`)
-
-`info_gu` is the standing library note; `resources[]` entries with a non-empty `path` show a download button.
-
-## Publishing from private repos
-
-Content is authored in private repos (weekly planner tools). To publish:
-
-1. Export parent PDF/PNG from the planner tool
-2. Copy files into `files/`, update `data/weeks.json`
-3. Commit and push to `main`
-
-This can be automated later with a GitHub Action in the private repo that pushes to this repo using a fine-grained PAT.
-
-## Constraints (GitHub Pages free tier)
-
-- Static files only — no server, no database, no login
-- Do not publish private/sensitive data (student names, phone numbers, photos with identifiable children) — this repo is public
-- Site size limit 1 GB; keep PDFs lean
+- Static only (GitHub Pages free tier): no server, no login, no database
+- This repo is public — never publish student names, phones, or photos

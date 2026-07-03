@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>શાર્દૂલ શિશુ વિહાર — માતાપિતા પોર્ટલ</title>
+<title>શાર્દૂલ શિશુ વિહાર — સાપ્તાહિક પ્રવૃત્તિ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
@@ -12,6 +12,7 @@
     --saffron: #e07b39;
     --saffron-dark: #c05f1f;
     --green: #3a7d44;
+    --green-dark: #2c6134;
     --cream: #fdf8f0;
     --card: #ffffff;
     --ink: #33302b;
@@ -39,7 +40,7 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    padding: 12px 16px 0;
+    padding: 14px 16px 4px;
     flex-wrap: wrap;
   }
   .group-btn {
@@ -47,43 +48,52 @@
     background: var(--card);
     color: var(--saffron-dark);
     border-radius: 20px;
-    padding: 6px 16px;
+    padding: 6px 18px;
     font-family: inherit;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
   }
   .group-btn.active { background: var(--saffron); color: #fff; }
   .group-btn .age { font-size: 0.72rem; font-weight: 400; display: block; }
 
-  nav {
+  .week-nav {
     display: flex;
     justify-content: center;
-    gap: 4px;
-    padding: 12px 8px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
     position: sticky;
     top: 0;
     background: var(--cream);
     z-index: 10;
     border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
   }
-  .tab-btn {
-    border: none;
-    background: transparent;
+  .week-nav button {
+    border: 1.5px solid var(--green);
+    background: var(--card);
+    color: var(--green-dark);
+    border-radius: 8px;
+    width: 40px;
+    height: 38px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .week-nav button:disabled { opacity: 0.3; cursor: default; }
+  .week-nav select {
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--muted);
-    padding: 8px 14px;
+    color: var(--green-dark);
+    border: 1.5px solid var(--green);
     border-radius: 8px;
-    cursor: pointer;
+    padding: 7px 10px;
+    background: var(--card);
+    max-width: 300px;
   }
-  .tab-btn.active { background: var(--green); color: #fff; }
 
   main { max-width: 720px; margin: 0 auto; padding: 16px; }
-  section { display: none; }
-  section.active { display: block; }
 
   .card {
     background: var(--card);
@@ -95,7 +105,6 @@
   }
   .card.pinned { background: var(--pin); border-color: var(--saffron); }
   .card h3 { font-size: 1.05rem; color: var(--saffron-dark); margin-bottom: 6px; }
-  .card .meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
   .card p { font-size: 0.92rem; }
   .card ul { padding-left: 20px; font-size: 0.9rem; }
   .card ul li { margin-bottom: 4px; }
@@ -108,7 +117,7 @@
     border-radius: 0 8px 8px 0;
   }
   .kriya h4 { font-size: 0.95rem; color: var(--green); }
-  .kriya .mahatva { font-size: 0.82rem; color: var(--muted); font-style: italic; margin-top: 4px; }
+  .kriya .meta { font-size: 0.82rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 
   .week-banner {
     background: var(--green);
@@ -120,6 +129,14 @@
   }
   .week-banner .dates { font-size: 0.85rem; opacity: 0.9; }
   .week-banner h2 { font-size: 1.15rem; }
+  .current-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border-radius: 10px;
+    font-size: 0.72rem;
+    padding: 1px 10px;
+    margin-top: 4px;
+  }
 
   .file-link {
     display: inline-block;
@@ -140,7 +157,6 @@
     padding: 32px 16px;
     font-size: 0.92rem;
   }
-  .due { color: var(--saffron-dark); font-weight: 600; font-size: 0.85rem; }
 
   footer {
     text-align: center;
@@ -159,25 +175,20 @@
 
 <div class="group-switch" id="groupSwitch"></div>
 
-<nav>
-  <button class="tab-btn active" data-tab="week">આ સપ્તાહ</button>
-  <button class="tab-btn" data-tab="homework">ગૃહકાર્ય</button>
-  <button class="tab-btn" data-tab="library">પુસ્તકાલય</button>
-  <button class="tab-btn" data-tab="announcements">સૂચનાઓ</button>
-</nav>
+<div class="week-nav">
+  <button id="prevWeek" aria-label="પાછલું સપ્તાહ">‹</button>
+  <select id="weekSelect"></select>
+  <button id="nextWeek" aria-label="આગલું સપ્તાહ">›</button>
+</div>
 
-<main>
-  <section id="tab-week" class="active"></section>
-  <section id="tab-homework"></section>
-  <section id="tab-library"></section>
-  <section id="tab-announcements"></section>
-</main>
+<main id="content"></main>
 
 <footer>શાર્દૂલ શિશુ વિહાર, વડોદરા</footer>
 
 <script>
-let CONFIG = null, WEEKS = [], HOMEWORK = [], LIBRARY = null, ANNOUNCEMENTS = [];
+let CONFIG = null, WEEKS = [];
 let activeGroup = localStorage.getItem('sp_group') || 'savaj_kesari';
+let activeWeekIdx = 0; // index into sorted WEEKS
 
 const GU_DIGITS = "૦૧૨૩૪૫૬૭૮૯";
 const GU_MONTHS = {1:"જાન્યુઆરી",2:"ફેબ્રુઆરી",3:"માર્ચ",4:"એપ્રિલ",5:"મે",6:"જૂન",7:"જુલાઈ",8:"ઓગસ્ટ",9:"સપ્ટેમ્બર",10:"ઑક્ટોબર",11:"નવેમ્બર",12:"ડિસેમ્બર"};
@@ -199,6 +210,24 @@ async function loadJson(path, fallback) {
   } catch { return fallback; }
 }
 
+function isCurrentWeek(w) {
+  const today = new Date();
+  const start = new Date(w.start_date + "T00:00:00");
+  const end = new Date(w.end_date + "T23:59:59");
+  return today >= start && today <= end;
+}
+
+function defaultWeekIdx() {
+  const today = new Date();
+  const cur = WEEKS.findIndex(isCurrentWeek);
+  if (cur >= 0) return cur;
+  // otherwise latest week that already started, else the first published
+  for (let i = WEEKS.length - 1; i >= 0; i--) {
+    if (new Date(WEEKS[i].start_date + "T00:00:00") <= today) return i;
+  }
+  return 0;
+}
+
 function renderGroupSwitch() {
   const el = document.getElementById('groupSwitch');
   el.innerHTML = CONFIG.groups.map(g => `
@@ -211,9 +240,18 @@ function renderGroupSwitch() {
       localStorage.setItem('sp_group', activeGroup);
       renderGroupSwitch();
       renderWeek();
-      renderHomework();
     });
   });
+}
+
+function renderWeekNav() {
+  const sel = document.getElementById('weekSelect');
+  sel.innerHTML = WEEKS.map((w, i) =>
+    `<option value="${i}">સપ્તાહ ${toGu(w.week)} — ${guDate(w.start_date)}${isCurrentWeek(w) ? ' (ચાલુ)' : ''}</option>`
+  ).join("");
+  sel.value = activeWeekIdx;
+  document.getElementById('prevWeek').disabled = activeWeekIdx <= 0;
+  document.getElementById('nextWeek').disabled = activeWeekIdx >= WEEKS.length - 1;
 }
 
 function fileLinks(files) {
@@ -224,20 +262,18 @@ function fileLinks(files) {
 }
 
 function renderWeek() {
-  const el = document.getElementById('tab-week');
-  const today = new Date();
-  // Latest week whose start_date <= today, else latest published
-  const sorted = [...WEEKS].sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
-  const wk = sorted.find(w => new Date(w.start_date + "T00:00:00") <= today) || sorted[0];
-  if (!wk) {
-    el.innerHTML = `<div class="empty">આ સપ્તાહનું આયોજન હજી પ્રકાશિત થયું નથી.</div>`;
+  const el = document.getElementById('content');
+  if (!WEEKS.length) {
+    el.innerHTML = `<div class="empty">સાપ્તાહિક આયોજન હજી પ્રકાશિત થયું નથી.</div>`;
     return;
   }
+  const wk = WEEKS[activeWeekIdx];
   const g = (wk.groups && wk.groups[activeGroup]) || {};
   let html = `
     <div class="week-banner">
       <h2>${esc(wk.title_gu || ('સપ્તાહ ' + toGu(wk.week)))}</h2>
       <div class="dates">${guDate(wk.start_date)} — ${guDate(wk.end_date)}</div>
+      ${isCurrentWeek(wk) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
     </div>`;
 
   if (g.summary_gu) {
@@ -251,8 +287,8 @@ function renderWeek() {
       <div class="kriya">
         <h4>${esc(k.title)}</h4>
         ${k.steps && k.steps.length ? `<ul>${k.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
-        ${k.materials ? `<div class="mahatva">સામગ્રી: ${esc(k.materials)}</div>` : ""}
-        ${k.mahatva ? `<div class="mahatva">મહત્વ: ${esc(k.mahatva)}</div>` : ""}
+        ${k.materials ? `<div class="meta">સામગ્રી: ${esc(k.materials)}</div>` : ""}
+        ${k.mahatva ? `<div class="meta">મહત્વ: ${esc(k.mahatva)}</div>` : ""}
       </div>`).join("") + `</div>`;
   }
   if (g.parent_note_gu) {
@@ -265,97 +301,46 @@ function renderWeek() {
     html += `<div class="card"><h3>ઋતુ નોંધ</h3><p>${esc(wk.season_note_gu)}</p></div>`;
   }
   if (g.files && g.files.length) {
-    html += `<div class="card"><h3>ડાઉનલોડ</h3>${fileLinks(g.files)}</div>`;
+    html += `<div class="card"><h3>ડાઉનલોડ (PDF / ચિત્ર)</h3>${fileLinks(g.files)}</div>`;
   }
   if (!g.summary_gu && !(g.activities_gu || []).length && !(g.kriyakalapo || []).length && !g.parent_note_gu && !(g.files || []).length) {
-    html += `<div class="empty">આ જૂથ માટે આ સપ્તાહની વિગતો ટૂંક સમયમાં ઉમેરાશે.</div>`;
+    html += `<div class="empty">આ જૂથ માટે આ સપ્તાહની વિગતો હજી ઉમેરાઈ નથી.</div>`;
   }
   el.innerHTML = html;
 }
 
-function renderHomework() {
-  const el = document.getElementById('tab-homework');
-  const items = HOMEWORK
-    .filter(h => h.group === activeGroup || h.group === 'all')
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
-  if (!items.length) {
-    el.innerHTML = `<div class="empty">હાલમાં કોઈ ગૃહકાર્ય નથી.</div>`;
-    return;
-  }
-  el.innerHTML = items.map(h => `
-    <div class="card">
-      <h3>${esc(h.title_gu)}</h3>
-      <div class="meta">${guDate(h.date)}</div>
-      <p>${esc(h.details_gu)}</p>
-      ${h.due_date ? `<div class="due">છેલ્લી તારીખ: ${guDate(h.due_date)}</div>` : ""}
-      ${fileLinks(h.files)}
-    </div>`).join("");
+function goWeek(delta) {
+  const next = activeWeekIdx + delta;
+  if (next < 0 || next >= WEEKS.length) return;
+  activeWeekIdx = next;
+  renderWeekNav();
+  renderWeek();
 }
 
-function renderLibrary() {
-  const el = document.getElementById('tab-library');
-  let html = "";
-  if (LIBRARY && LIBRARY.info_gu) {
-    html += `<div class="card pinned"><h3>પુસ્તકાલય માહિતી</h3><p>${esc(LIBRARY.info_gu)}</p></div>`;
-  }
-  const res = (LIBRARY && LIBRARY.resources || []).filter(r => r.path);
-  if (res.length) {
-    html += res.map(r => `
-      <div class="card">
-        <h3>${esc(r.title_gu)}</h3>
-        ${r.note_gu ? `<p>${esc(r.note_gu)}</p>` : ""}
-        <a class="file-link" href="${esc(r.path)}" target="_blank" rel="noopener">📄 ખોલો</a>
-      </div>`).join("");
-  } else {
-    html += `<div class="empty">સાધન-સામગ્રી ટૂંક સમયમાં ઉમેરાશે.</div>`;
-  }
-  el.innerHTML = html;
-}
-
-function renderAnnouncements() {
-  const el = document.getElementById('tab-announcements');
-  const items = [...ANNOUNCEMENTS].sort((a, b) =>
-    (b.pinned - a.pinned) || (new Date(b.date) - new Date(a.date)));
-  if (!items.length) {
-    el.innerHTML = `<div class="empty">હાલમાં કોઈ સૂચના નથી.</div>`;
-    return;
-  }
-  el.innerHTML = items.map(a => `
-    <div class="card ${a.pinned ? 'pinned' : ''}">
-      <h3>${a.pinned ? '📌 ' : ''}${esc(a.title_gu)}</h3>
-      <div class="meta">${guDate(a.date)}</div>
-      <p>${esc(a.details_gu)}</p>
-    </div>`).join("");
-}
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-  });
+document.getElementById('prevWeek').addEventListener('click', () => goWeek(-1));
+document.getElementById('nextWeek').addEventListener('click', () => goWeek(1));
+document.getElementById('weekSelect').addEventListener('change', e => {
+  activeWeekIdx = Number(e.target.value);
+  renderWeekNav();
+  renderWeek();
 });
 
 (async function init() {
-  [CONFIG, WEEKS, HOMEWORK, LIBRARY, ANNOUNCEMENTS] = await Promise.all([
+  [CONFIG, WEEKS] = await Promise.all([
     loadJson('data/config.json', { school: {}, groups: [] }),
-    loadJson('data/weeks.json', []),
-    loadJson('data/homework.json', []),
-    loadJson('data/library.json', null),
-    loadJson('data/announcements.json', [])
+    loadJson('data/weeks.json', [])
   ]);
+  WEEKS.sort((a, b) => a.week - b.week);
   if (CONFIG.school.name_gu) document.getElementById('schoolName').textContent = CONFIG.school.name_gu;
-  const sub = [CONFIG.school.city_gu, CONFIG.school.session_gu].filter(Boolean).join(" — ");
+  const sub = [CONFIG.school.city_gu, CONFIG.school.session_gu, 'સાપ્તાહિક પ્રવૃત્તિ'].filter(Boolean).join(" — ");
   if (sub) document.getElementById('schoolSub').textContent = sub;
   if (!CONFIG.groups.some(g => g.id === activeGroup) && CONFIG.groups.length) {
     activeGroup = CONFIG.groups[0].id;
   }
+  activeWeekIdx = defaultWeekIdx();
   renderGroupSwitch();
+  renderWeekNav();
   renderWeek();
-  renderHomework();
-  renderLibrary();
-  renderAnnouncements();
 })();
 </script>
 </body>
