@@ -243,11 +243,15 @@ function renderWeek() {
   if (g.summary_gu) {
     html += `<div class="card"><h3>સાપ્તાહિક ઝલક</h3><p>${esc(g.summary_gu)}</p></div>`;
   }
+  if (g.activities_gu && g.activities_gu.length) {
+    html += `<div class="card"><h3>મુખ્ય પ્રવૃત્તિઓ</h3><ul>${g.activities_gu.map(a => `<li>${esc(a)}</li>`).join("")}</ul></div>`;
+  }
   if (g.kriyakalapo && g.kriyakalapo.length) {
     html += `<div class="card"><h3>ક્રિયાકલાપ</h3>` + g.kriyakalapo.map(k => `
       <div class="kriya">
         <h4>${esc(k.title)}</h4>
         ${k.steps && k.steps.length ? `<ul>${k.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
+        ${k.materials ? `<div class="mahatva">સામગ્રી: ${esc(k.materials)}</div>` : ""}
         ${k.mahatva ? `<div class="mahatva">મહત્વ: ${esc(k.mahatva)}</div>` : ""}
       </div>`).join("") + `</div>`;
   }
@@ -263,7 +267,7 @@ function renderWeek() {
   if (g.files && g.files.length) {
     html += `<div class="card"><h3>ડાઉનલોડ</h3>${fileLinks(g.files)}</div>`;
   }
-  if (!g.summary_gu && !(g.kriyakalapo || []).length && !g.parent_note_gu && !(g.files || []).length) {
+  if (!g.summary_gu && !(g.activities_gu || []).length && !(g.kriyakalapo || []).length && !g.parent_note_gu && !(g.files || []).length) {
     html += `<div class="empty">આ જૂથ માટે આ સપ્તાહની વિગતો ટૂંક સમયમાં ઉમેરાશે.</div>`;
   }
   el.innerHTML = html;
