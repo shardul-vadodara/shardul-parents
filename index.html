@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>શાર્દૂલ શિશુ વિહાર — માતાપિતા પોર્ટલ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --saffron: #e07b39;
+    --saffron-dark: #c05f1f;
+    --green: #3a7d44;
+    --cream: #fdf8f0;
+    --card: #ffffff;
+    --ink: #33302b;
+    --muted: #7a736a;
+    --border: #eadfce;
+    --pin: #fff3e0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans Gujarati', 'Nirmala UI', 'Shruti', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--saffron-dark) 100%);
+    color: #fff;
+    padding: 20px 16px 14px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.4rem; font-weight: 700; }
+  header .sub { font-size: 0.85rem; opacity: 0.92; margin-top: 2px; }
+
+  .group-switch {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px 0;
+    flex-wrap: wrap;
+  }
+  .group-btn {
+    border: 1.5px solid var(--saffron);
+    background: var(--card);
+    color: var(--saffron-dark);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .group-btn.active { background: var(--saffron); color: #fff; }
+  .group-btn .age { font-size: 0.72rem; font-weight: 400; display: block; }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 8px;
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .tab-btn.active { background: var(--green); color: #fff; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 16px; }
+  section { display: none; }
+  section.active { display: block; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .card.pinned { background: var(--pin); border-color: var(--saffron); }
+  .card h3 { font-size: 1.05rem; color: var(--saffron-dark); margin-bottom: 6px; }
+  .card .meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+  .card p { font-size: 0.92rem; }
+  .card ul { padding-left: 20px; font-size: 0.9rem; }
+  .card ul li { margin-bottom: 4px; }
+
+  .kriya {
+    border-left: 3px solid var(--green);
+    padding: 8px 12px;
+    margin-top: 10px;
+    background: #f6faf4;
+    border-radius: 0 8px 8px 0;
+  }
+  .kriya h4 { font-size: 0.95rem; color: var(--green); }
+  .kriya .mahatva { font-size: 0.82rem; color: var(--muted); font-style: italic; margin-top: 4px; }
+
+  .week-banner {
+    background: var(--green);
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .week-banner .dates { font-size: 0.85rem; opacity: 0.9; }
+  .week-banner h2 { font-size: 1.15rem; }
+
+  .file-link {
+    display: inline-block;
+    background: var(--saffron);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 6px 6px 0 0;
+  }
+  .file-link:hover { background: var(--saffron-dark); }
+
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 32px 16px;
+    font-size: 0.92rem;
+  }
+  .due { color: var(--saffron-dark); font-weight: 600; font-size: 0.85rem; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 20px 16px 28px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="schoolName">શાર્દૂલ શિશુ વિહાર</h1>
+  <div class="sub" id="schoolSub">વડોદરા</div>
+</header>
+
+<div class="group-switch" id="groupSwitch"></div>
+
+<nav>
+  <button class="tab-btn active" data-tab="week">આ સપ્તાહ</button>
+  <button class="tab-btn" data-tab="homework">ગૃહકાર્ય</button>
+  <button class="tab-btn" data-tab="library">પુસ્તકાલય</button>
+  <button class="tab-btn" data-tab="announcements">સૂચનાઓ</button>
+</nav>
+
+<main>
+  <section id="tab-week" class="active"></section>
+  <section id="tab-homework"></section>
+  <section id="tab-library"></section>
+  <section id="tab-announcements"></section>
+</main>
+
+<footer>શાર્દૂલ શિશુ વિહાર, વડોદરા</footer>
+
+<script>
+let CONFIG = null, WEEKS = [], HOMEWORK = [], LIBRARY = null, ANNOUNCEMENTS = [];
+let activeGroup = localStorage.getItem('sp_group') || 'savaj_kesari';
+
+const GU_DIGITS = "૦૧૨૩૪૫૬૭૮૯";
+const GU_MONTHS = {1:"જાન્યુઆરી",2:"ફેબ્રુઆરી",3:"માર્ચ",4:"એપ્રિલ",5:"મે",6:"જૂન",7:"જુલાઈ",8:"ઓગસ્ટ",9:"સપ્ટેમ્બર",10:"ઑક્ટોબર",11:"નવેમ્બર",12:"ડિસેમ્બર"};
+const toGu = n => String(n).split("").map(c => /\d/.test(c) ? GU_DIGITS[c] : c).join("");
+function guDate(dstr) {
+  if (!dstr) return "";
+  const d = new Date(dstr + "T00:00:00");
+  return `${toGu(d.getDate())} ${GU_MONTHS[d.getMonth()+1]}`;
+}
+function esc(s) {
+  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+async function loadJson(path, fallback) {
+  try {
+    const r = await fetch(path, { cache: "no-cache" });
+    if (!r.ok) return fallback;
+    return await r.json();
+  } catch { return fallback; }
+}
+
+function renderGroupSwitch() {
+  const el = document.getElementById('groupSwitch');
+  el.innerHTML = CONFIG.groups.map(g => `
+    <button class="group-btn ${g.id === activeGroup ? 'active' : ''}" data-group="${g.id}">
+      ${esc(g.name_gu)}<span class="age">${esc(g.age_gu)}</span>
+    </button>`).join("");
+  el.querySelectorAll('.group-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeGroup = btn.dataset.group;
+      localStorage.setItem('sp_group', activeGroup);
+      renderGroupSwitch();
+      renderWeek();
+      renderHomework();
+    });
+  });
+}
+
+function fileLinks(files) {
+  if (!files || !files.length) return "";
+  return `<div>` + files.map(f =>
+    `<a class="file-link" href="${esc(f.path)}" target="_blank" rel="noopener">📄 ${esc(f.label_gu || f.path)}</a>`
+  ).join("") + `</div>`;
+}
+
+function renderWeek() {
+  const el = document.getElementById('tab-week');
+  const today = new Date();
+  // Latest week whose start_date <= today, else latest published
+  const sorted = [...WEEKS].sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+  const wk = sorted.find(w => new Date(w.start_date + "T00:00:00") <= today) || sorted[0];
+  if (!wk) {
+    el.innerHTML = `<div class="empty">આ સપ્તાહનું આયોજન હજી પ્રકાશિત થયું નથી.</div>`;
+    return;
+  }
+  const g = (wk.groups && wk.groups[activeGroup]) || {};
+  let html = `
+    <div class="week-banner">
+      <h2>${esc(wk.title_gu || ('સપ્તાહ ' + toGu(wk.week)))}</h2>
+      <div class="dates">${guDate(wk.start_date)} — ${guDate(wk.end_date)}</div>
+    </div>`;
+
+  if (g.summary_gu) {
+    html += `<div class="card"><h3>સાપ્તાહિક ઝલક</h3><p>${esc(g.summary_gu)}</p></div>`;
+  }
+  if (g.kriyakalapo && g.kriyakalapo.length) {
+    html += `<div class="card"><h3>ક્રિયાકલાપ</h3>` + g.kriyakalapo.map(k => `
+      <div class="kriya">
+        <h4>${esc(k.title)}</h4>
+        ${k.steps && k.steps.length ? `<ul>${k.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
+        ${k.mahatva ? `<div class="mahatva">મહત્વ: ${esc(k.mahatva)}</div>` : ""}
+      </div>`).join("") + `</div>`;
+  }
+  if (g.parent_note_gu) {
+    html += `<div class="card pinned"><h3>માતાપિતા માટે ખાસ નોંધ</h3><p>${esc(g.parent_note_gu)}</p></div>`;
+  }
+  if (wk.festivals_gu && wk.festivals_gu.length) {
+    html += `<div class="card"><h3>તહેવાર / ઉત્સવ</h3><ul>${wk.festivals_gu.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>`;
+  }
+  if (wk.season_note_gu) {
+    html += `<div class="card"><h3>ઋતુ નોંધ</h3><p>${esc(wk.season_note_gu)}</p></div>`;
+  }
+  if (g.files && g.files.length) {
+    html += `<div class="card"><h3>ડાઉનલોડ</h3>${fileLinks(g.files)}</div>`;
+  }
+  if (!g.summary_gu && !(g.kriyakalapo || []).length && !g.parent_note_gu && !(g.files || []).length) {
+    html += `<div class="empty">આ જૂથ માટે આ સપ્તાહની વિગતો ટૂંક સમયમાં ઉમેરાશે.</div>`;
+  }
+  el.innerHTML = html;
+}
+
+function renderHomework() {
+  const el = document.getElementById('tab-homework');
+  const items = HOMEWORK
+    .filter(h => h.group === activeGroup || h.group === 'all')
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  if (!items.length) {
+    el.innerHTML = `<div class="empty">હાલમાં કોઈ ગૃહકાર્ય નથી.</div>`;
+    return;
+  }
+  el.innerHTML = items.map(h => `
+    <div class="card">
+      <h3>${esc(h.title_gu)}</h3>
+      <div class="meta">${guDate(h.date)}</div>
+      <p>${esc(h.details_gu)}</p>
+      ${h.due_date ? `<div class="due">છેલ્લી તારીખ: ${guDate(h.due_date)}</div>` : ""}
+      ${fileLinks(h.files)}
+    </div>`).join("");
+}
+
+function renderLibrary() {
+  const el = document.getElementById('tab-library');
+  let html = "";
+  if (LIBRARY && LIBRARY.info_gu) {
+    html += `<div class="card pinned"><h3>પુસ્તકાલય માહિતી</h3><p>${esc(LIBRARY.info_gu)}</p></div>`;
+  }
+  const res = (LIBRARY && LIBRARY.resources || []).filter(r => r.path);
+  if (res.length) {
+    html += res.map(r => `
+      <div class="card">
+        <h3>${esc(r.title_gu)}</h3>
+        ${r.note_gu ? `<p>${esc(r.note_gu)}</p>` : ""}
+        <a class="file-link" href="${esc(r.path)}" target="_blank" rel="noopener">📄 ખોલો</a>
+      </div>`).join("");
+  } else {
+    html += `<div class="empty">સાધન-સામગ્રી ટૂંક સમયમાં ઉમેરાશે.</div>`;
+  }
+  el.innerHTML = html;
+}
+
+function renderAnnouncements() {
+  const el = document.getElementById('tab-announcements');
+  const items = [...ANNOUNCEMENTS].sort((a, b) =>
+    (b.pinned - a.pinned) || (new Date(b.date) - new Date(a.date)));
+  if (!items.length) {
+    el.innerHTML = `<div class="empty">હાલમાં કોઈ સૂચના નથી.</div>`;
+    return;
+  }
+  el.innerHTML = items.map(a => `
+    <div class="card ${a.pinned ? 'pinned' : ''}">
+      <h3>${a.pinned ? '📌 ' : ''}${esc(a.title_gu)}</h3>
+      <div class="meta">${guDate(a.date)}</div>
+      <p>${esc(a.details_gu)}</p>
+    </div>`).join("");
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+(async function init() {
+  [CONFIG, WEEKS, HOMEWORK, LIBRARY, ANNOUNCEMENTS] = await Promise.all([
+    loadJson('data/config.json', { school: {}, groups: [] }),
+    loadJson('data/weeks.json', []),
+    loadJson('data/homework.json', []),
+    loadJson('data/library.json', null),
+    loadJson('data/announcements.json', [])
+  ]);
+  if (CONFIG.school.name_gu) document.getElementById('schoolName').textContent = CONFIG.school.name_gu;
+  const sub = [CONFIG.school.city_gu, CONFIG.school.session_gu].filter(Boolean).join(" — ");
+  if (sub) document.getElementById('schoolSub').textContent = sub;
+  if (!CONFIG.groups.some(g => g.id === activeGroup) && CONFIG.groups.length) {
+    activeGroup = CONFIG.groups[0].id;
+  }
+  renderGroupSwitch();
+  renderWeek();
+  renderHomework();
+  renderLibrary();
+  renderAnnouncements();
+})();
+</script>
+</body>
+</html>

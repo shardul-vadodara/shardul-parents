@@ -1,0 +1,20 @@
+{
+  "school": {
+    "name_gu": "શાર્દૂલ શિશુ વિહાર",
+    "city_gu": "વડોદરા",
+    "session_gu": "સત્ર ૨૦૨૬-૨૦૨૭",
+    "session_start": "2026-06-15"
+  },
+  "groups": [
+    {
+      "id": "savaj_kesari",
+      "name_gu": "સાવજ-કેસરી",
+      "age_gu": "૨.૫-૫.૫ વર્ષ"
+    },
+    {
+      "id": "mrigendra_pundarik",
+      "name_gu": "મૃગેન્દ્ર-પુંડરિક",
+      "age_gu": "૫.૫-૮ વર્ષ"
+    }
+  ]
+}
