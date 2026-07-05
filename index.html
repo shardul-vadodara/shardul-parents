@@ -18,7 +18,6 @@
     --ink: #33302b;
     --muted: #7a736a;
     --border: #eadfce;
-    --pin: #fff3e0;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -57,74 +56,14 @@
   .group-btn.active { background: var(--saffron); color: #fff; }
   .group-btn .age { font-size: 0.72rem; font-weight: 400; display: block; }
 
-  .week-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
-    position: sticky;
-    top: 0;
-    background: var(--cream);
-    z-index: 10;
-    border-bottom: 1px solid var(--border);
-  }
-  .week-nav button {
-    border: 1.5px solid var(--green);
-    background: var(--card);
-    color: var(--green-dark);
-    border-radius: 8px;
-    width: 40px;
-    height: 38px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .week-nav button:disabled { opacity: 0.3; cursor: default; }
-  .week-nav select {
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--green-dark);
-    border: 1.5px solid var(--green);
-    border-radius: 8px;
-    padding: 7px 10px;
-    background: var(--card);
-    max-width: 300px;
-  }
-
   main { max-width: 720px; margin: 0 auto; padding: 16px; }
-
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 14px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  .card.pinned { background: var(--pin); border-color: var(--saffron); }
-  .card h3 { font-size: 1.05rem; color: var(--saffron-dark); margin-bottom: 6px; }
-  .card p { font-size: 0.92rem; }
-  .card ul { padding-left: 20px; font-size: 0.9rem; }
-  .card ul li { margin-bottom: 4px; }
-
-  .kriya {
-    border-left: 3px solid var(--green);
-    padding: 8px 12px;
-    margin-top: 10px;
-    background: #f6faf4;
-    border-radius: 0 8px 8px 0;
-  }
-  .kriya h4 { font-size: 0.95rem; color: var(--green); }
-  .kriya .meta { font-size: 0.82rem; color: var(--muted); font-style: italic; margin-top: 4px; }
 
   .week-banner {
     background: var(--green);
     color: #fff;
     border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 14px;
+    padding: 16px;
+    margin-bottom: 18px;
     text-align: center;
   }
   .week-banner .dates { font-size: 0.85rem; opacity: 0.9; }
@@ -137,6 +76,7 @@
     padding: 1px 10px;
     margin-top: 4px;
   }
+  .week-banner .downloads { margin-top: 10px; }
 
   .file-link {
     display: inline-block;
@@ -150,6 +90,44 @@
     margin: 6px 6px 0 0;
   }
   .file-link:hover { background: var(--saffron-dark); }
+  .week-banner .file-link { background: #fff; color: var(--green-dark); }
+
+  .section-title {
+    font-size: 1.0rem;
+    color: var(--green-dark);
+    margin: 18px 0 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+  }
+  .week-row {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .week-row .info { flex: 1 1 260px; }
+  .week-row .info b { font-size: 0.95rem; }
+  .week-row .info .dates { font-size: 0.8rem; color: var(--muted); }
+  .week-row .links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .week-row .file-link { margin: 0; padding: 7px 14px; }
+  .upcoming-tag {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    padding: 0 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .nofiles { font-size: 0.82rem; color: var(--muted); font-style: italic; }
 
   .empty {
     text-align: center;
@@ -175,20 +153,13 @@
 
 <div class="group-switch" id="groupSwitch"></div>
 
-<div class="week-nav">
-  <button id="prevWeek" aria-label="પાછલું સપ્તાહ">‹</button>
-  <select id="weekSelect"></select>
-  <button id="nextWeek" aria-label="આગલું સપ્તાહ">›</button>
-</div>
-
 <main id="content"></main>
 
 <footer>શાર્દૂલ શિશુ વિહાર, વડોદરા</footer>
 
 <script>
-let CONFIG = null, WEEKS = [];
+let CONFIG = null, WEEKS = []; // WEEKS sorted newest first
 let activeGroup = localStorage.getItem('sp_group') || 'savaj_kesari';
-let activeWeekIdx = 0; // index into sorted WEEKS
 
 const GU_DIGITS = "૦૧૨૩૪૫૬૭૮૯";
 const GU_MONTHS = {1:"જાન્યુઆરી",2:"ફેબ્રુઆરી",3:"માર્ચ",4:"એપ્રિલ",5:"મે",6:"જૂન",7:"જુલાઈ",8:"ઓગસ્ટ",9:"સપ્ટેમ્બર",10:"ઑક્ટોબર",11:"નવેમ્બર",12:"ડિસેમ્બર"};
@@ -216,16 +187,17 @@ function isCurrentWeek(w) {
   const end = new Date(w.end_date + "T23:59:59");
   return today >= start && today <= end;
 }
+function isFutureWeek(w) {
+  return new Date(w.start_date + "T00:00:00") > new Date();
+}
 
-function defaultWeekIdx() {
-  const today = new Date();
-  const cur = WEEKS.findIndex(isCurrentWeek);
-  if (cur >= 0) return cur;
-  // otherwise latest week that already started, else the first published
-  for (let i = WEEKS.length - 1; i >= 0; i--) {
-    if (new Date(WEEKS[i].start_date + "T00:00:00") <= today) return i;
-  }
-  return 0;
+// The week featured on top: current week, else the latest already-started,
+// else the earliest published (all-future edge case).
+function featuredWeek() {
+  const cur = WEEKS.find(isCurrentWeek);
+  if (cur) return cur;
+  const started = WEEKS.find(w => !isFutureWeek(w));
+  return started || WEEKS[WEEKS.length - 1];
 }
 
 function renderGroupSwitch() {
@@ -239,108 +211,71 @@ function renderGroupSwitch() {
       activeGroup = btn.dataset.group;
       localStorage.setItem('sp_group', activeGroup);
       renderGroupSwitch();
-      renderWeek();
+      renderList();
     });
   });
 }
 
-function renderWeekNav() {
-  const sel = document.getElementById('weekSelect');
-  sel.innerHTML = WEEKS.map((w, i) =>
-    `<option value="${i}">સપ્તાહ ${toGu(w.week)} — ${guDate(w.start_date)}${isCurrentWeek(w) ? ' (ચાલુ)' : ''}</option>`
-  ).join("");
-  sel.value = activeWeekIdx;
-  document.getElementById('prevWeek').disabled = activeWeekIdx <= 0;
-  document.getElementById('nextWeek').disabled = activeWeekIdx >= WEEKS.length - 1;
+function groupFiles(wk) {
+  const g = (wk.groups && wk.groups[activeGroup]) || {};
+  return g.files || [];
 }
 
 function fileLinks(files) {
-  if (!files || !files.length) return "";
-  return `<div>` + files.map(f =>
-    `<a class="file-link" href="${esc(f.path)}" target="_blank" rel="noopener">📄 ${esc(f.label_gu || f.path)}</a>`
-  ).join("") + `</div>`;
+  return files.map(f => {
+    const isPdf = /\.pdf$/i.test(f.path);
+    return `<a class="file-link" href="${esc(f.path)}" target="_blank" rel="noopener">${isPdf ? '📄 PDF' : '🖼️ ચિત્ર'}</a>`;
+  }).join("");
 }
 
-function renderWeek() {
+function renderList() {
   const el = document.getElementById('content');
   if (!WEEKS.length) {
     el.innerHTML = `<div class="empty">સાપ્તાહિક આયોજન હજી પ્રકાશિત થયું નથી.</div>`;
     return;
   }
-  const wk = WEEKS[activeWeekIdx];
-  const g = (wk.groups && wk.groups[activeGroup]) || {};
+  const featured = featuredWeek();
+  const files = groupFiles(featured);
   let html = `
     <div class="week-banner">
-      <h2>${esc(wk.title_gu || ('સપ્તાહ ' + toGu(wk.week)))}</h2>
-      <div class="dates">${guDate(wk.start_date)} — ${guDate(wk.end_date)}</div>
-      ${isCurrentWeek(wk) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
+      <h2>સપ્તાહ ${toGu(featured.week)} — ${esc(featured.title_gu || '')}</h2>
+      <div class="dates">${guDate(featured.start_date)} — ${guDate(featured.end_date)}</div>
+      ${isCurrentWeek(featured) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
+      <div class="downloads">${files.length ? fileLinks(files) : '<span style="font-size:0.85rem;opacity:0.85;">આ જૂથ માટે ફાઈલો હજી ઉપલબ્ધ નથી.</span>'}</div>
     </div>`;
 
-  if (g.summary_gu) {
-    html += `<div class="card"><h3>સાપ્તાહિક ઝલક</h3><p>${esc(g.summary_gu)}</p></div>`;
-  }
-  if (g.activities_gu && g.activities_gu.length) {
-    html += `<div class="card"><h3>મુખ્ય પ્રવૃત્તિઓ</h3><ul>${g.activities_gu.map(a => `<li>${esc(a)}</li>`).join("")}</ul></div>`;
-  }
-  if (g.kriyakalapo && g.kriyakalapo.length) {
-    html += `<div class="card"><h3>ક્રિયાકલાપ</h3>` + g.kriyakalapo.map(k => `
-      <div class="kriya">
-        <h4>${esc(k.title)}</h4>
-        ${k.steps && k.steps.length ? `<ul>${k.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
-        ${k.materials ? `<div class="meta">સામગ્રી: ${esc(k.materials)}</div>` : ""}
-        ${k.mahatva ? `<div class="meta">મહત્વ: ${esc(k.mahatva)}</div>` : ""}
-      </div>`).join("") + `</div>`;
-  }
-  if (g.parent_note_gu) {
-    html += `<div class="card pinned"><h3>માતાપિતા માટે ખાસ નોંધ</h3><p>${esc(g.parent_note_gu)}</p></div>`;
-  }
-  if (wk.festivals_gu && wk.festivals_gu.length) {
-    html += `<div class="card"><h3>તહેવાર / ઉત્સવ</h3><ul>${wk.festivals_gu.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>`;
-  }
-  if (wk.season_note_gu) {
-    html += `<div class="card"><h3>ઋતુ નોંધ</h3><p>${esc(wk.season_note_gu)}</p></div>`;
-  }
-  if (g.files && g.files.length) {
-    html += `<div class="card"><h3>ડાઉનલોડ (PDF / ચિત્ર)</h3>${fileLinks(g.files)}</div>`;
-  }
-  if (!g.summary_gu && !(g.activities_gu || []).length && !(g.kriyakalapo || []).length && !g.parent_note_gu && !(g.files || []).length) {
-    html += `<div class="empty">આ જૂથ માટે આ સપ્તાહની વિગતો હજી ઉમેરાઈ નથી.</div>`;
+  const rest = WEEKS.filter(w => w !== featured);
+  if (rest.length) {
+    html += `<h3 class="section-title">બધા સપ્તાહો</h3>`;
+    html += rest.map(w => {
+      const wfiles = groupFiles(w);
+      return `
+      <div class="week-row">
+        <div class="info">
+          <b>સપ્તાહ ${toGu(w.week)} — ${esc(w.title_gu || '')}</b>${isFutureWeek(w) ? '<span class="upcoming-tag">આગામી</span>' : ''}
+          <div class="dates">${guDate(w.start_date)} — ${guDate(w.end_date)}</div>
+        </div>
+        <div class="links">${wfiles.length ? fileLinks(wfiles) : '<span class="nofiles">ફાઈલો ઉપલબ્ધ નથી</span>'}</div>
+      </div>`;
+    }).join("");
   }
   el.innerHTML = html;
 }
-
-function goWeek(delta) {
-  const next = activeWeekIdx + delta;
-  if (next < 0 || next >= WEEKS.length) return;
-  activeWeekIdx = next;
-  renderWeekNav();
-  renderWeek();
-}
-
-document.getElementById('prevWeek').addEventListener('click', () => goWeek(-1));
-document.getElementById('nextWeek').addEventListener('click', () => goWeek(1));
-document.getElementById('weekSelect').addEventListener('change', e => {
-  activeWeekIdx = Number(e.target.value);
-  renderWeekNav();
-  renderWeek();
-});
 
 (async function init() {
   [CONFIG, WEEKS] = await Promise.all([
     loadJson('data/config.json', { school: {}, groups: [] }),
     loadJson('data/weeks.json', [])
   ]);
-  WEEKS.sort((a, b) => a.week - b.week);
+  WEEKS.sort((a, b) => b.week - a.week); // newest first
   if (CONFIG.school.name_gu) document.getElementById('schoolName').textContent = CONFIG.school.name_gu;
   const sub = [CONFIG.school.city_gu, CONFIG.school.session_gu, 'સાપ્તાહિક પ્રવૃત્તિ'].filter(Boolean).join(" — ");
   if (sub) document.getElementById('schoolSub').textContent = sub;
   if (!CONFIG.groups.some(g => g.id === activeGroup) && CONFIG.groups.length) {
     activeGroup = CONFIG.groups[0].id;
   }
-  activeWeekIdx = defaultWeekIdx();
   renderGroupSwitch();
-  renderWeekNav();
-  renderWeek();
+  renderList();
 })();
 </script>
 </body>
