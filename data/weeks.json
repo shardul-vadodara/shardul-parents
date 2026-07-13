@@ -30,5 +30,37 @@
         ]
       }
     }
+  },
+  {
+    "week": 5,
+    "start_date": "2026-07-13",
+    "end_date": "2026-07-19",
+    "title_gu": "અષાઢી રથયાત્રા પર્વ સંસ્કાર",
+    "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week5_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week5_mrigendra_pundarik.png"
+          }
+        ]
+      },
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week5_savaj_kesari.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week5_savaj_kesari.png"
+          }
+        ]
+      }
+    }
   }
 ]
