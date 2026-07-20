@@ -92,43 +92,6 @@
   .file-link:hover { background: var(--saffron-dark); }
   .week-banner .file-link { background: #fff; color: var(--green-dark); }
 
-  .section-title {
-    font-size: 1.0rem;
-    color: var(--green-dark);
-    margin: 18px 0 8px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 4px;
-  }
-  .week-row {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-  }
-  .week-row .info { flex: 1 1 260px; }
-  .week-row .info b { font-size: 0.95rem; }
-  .week-row .info .dates { font-size: 0.8rem; color: var(--muted); }
-  .week-row .links { display: flex; gap: 6px; flex-wrap: wrap; }
-  .week-row .file-link { margin: 0; padding: 7px 14px; }
-  .upcoming-tag {
-    display: inline-block;
-    background: var(--green);
-    color: #fff;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    padding: 0 8px;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
-  .nofiles { font-size: 0.82rem; color: var(--muted); font-style: italic; }
-
   .empty {
     text-align: center;
     color: var(--muted);
@@ -236,30 +199,13 @@ function renderList() {
   }
   const featured = featuredWeek();
   const files = groupFiles(featured);
-  let html = `
+  el.innerHTML = `
     <div class="week-banner">
       <h2>સપ્તાહ ${toGu(featured.week)} — ${esc(featured.title_gu || '')}</h2>
       <div class="dates">${guDate(featured.start_date)} — ${guDate(featured.end_date)}</div>
       ${isCurrentWeek(featured) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
       <div class="downloads">${files.length ? fileLinks(files) : '<span style="font-size:0.85rem;opacity:0.85;">આ જૂથ માટે ફાઈલો હજી ઉપલબ્ધ નથી.</span>'}</div>
     </div>`;
-
-  const rest = WEEKS.filter(w => w !== featured);
-  if (rest.length) {
-    html += `<h3 class="section-title">બધા સપ્તાહો</h3>`;
-    html += rest.map(w => {
-      const wfiles = groupFiles(w);
-      return `
-      <div class="week-row">
-        <div class="info">
-          <b>સપ્તાહ ${toGu(w.week)} — ${esc(w.title_gu || '')}</b>${isFutureWeek(w) ? '<span class="upcoming-tag">આગામી</span>' : ''}
-          <div class="dates">${guDate(w.start_date)} — ${guDate(w.end_date)}</div>
-        </div>
-        <div class="links">${wfiles.length ? fileLinks(wfiles) : '<span class="nofiles">ફાઈલો ઉપલબ્ધ નથી</span>'}</div>
-      </div>`;
-    }).join("");
-  }
-  el.innerHTML = html;
 }
 
 (async function init() {
