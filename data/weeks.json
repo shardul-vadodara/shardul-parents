@@ -62,5 +62,25 @@
         ]
       }
     }
+  },
+  {
+    "week": 6,
+    "start_date": "2026-07-20",
+    "end_date": "2026-07-26",
+    "title_gu": "ઇન્દ્રિય નિપુણતા નિરીક્ષણ",
+    "groups": {
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week6_savaj_kesari.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week6_savaj_kesari.png"
+          }
+        ]
+      }
+    }
   }
 ]
