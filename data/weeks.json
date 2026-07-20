@@ -69,6 +69,18 @@
     "end_date": "2026-07-26",
     "title_gu": "ઇન્દ્રિય નિપુણતા નિરીક્ષણ",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week6_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week6_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
           {
