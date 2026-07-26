@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>શાર્દૂલ શિશુ વિહાર — સાપ્તાહિક પ્રવૃત્તિ</title>
+<title>શાર્દૂલ શિશુ વિહાર — જૂના સપ્તાહ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
@@ -34,6 +34,7 @@
   }
   header h1 { font-size: 1.4rem; font-weight: 700; }
   header .sub { font-size: 0.85rem; opacity: 0.92; margin-top: 2px; }
+  header a.back { color: #fff; opacity: 0.85; font-size: 0.82rem; }
 
   .group-switch {
     display: flex;
@@ -63,7 +64,7 @@
     color: #fff;
     border-radius: 12px;
     padding: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     text-align: center;
   }
   .week-banner .dates { font-size: 0.85rem; opacity: 0.9; }
@@ -112,14 +113,15 @@
 
 <header>
   <h1 id="schoolName">શાર્દૂલ શિશુ વિહાર</h1>
-  <div class="sub" id="schoolSub">વડોદરા</div>
+  <div class="sub" id="schoolSub">વડોદરા — જૂના સપ્તાહ</div>
+  <div><a class="back" href="index.html">← ચાલુ સપ્તાહ પર પાછા</a></div>
 </header>
 
 <div class="group-switch" id="groupSwitch"></div>
 
 <main id="content"></main>
 
-<footer>શાર્દૂલ શિશુ વિહાર, વડોદરા · <a href="archive.html">જૂના સપ્તાહ</a></footer>
+<footer>શાર્દૂલ શિશુ વિહાર, વડોદરા</footer>
 
 <script>
 let CONFIG = null, WEEKS = []; // WEEKS sorted newest first
@@ -150,18 +152,6 @@ function isCurrentWeek(w) {
   const start = new Date(w.start_date + "T00:00:00");
   const end = new Date(w.end_date + "T23:59:59");
   return today >= start && today <= end;
-}
-function isFutureWeek(w) {
-  return new Date(w.start_date + "T00:00:00") > new Date();
-}
-
-// The week featured on top: current week, else the latest already-started,
-// else the earliest published (all-future edge case).
-function featuredWeek() {
-  const cur = WEEKS.find(isCurrentWeek);
-  if (cur) return cur;
-  const started = WEEKS.find(w => !isFutureWeek(w));
-  return started || WEEKS[WEEKS.length - 1];
 }
 
 function renderGroupSwitch() {
@@ -198,15 +188,16 @@ function renderList() {
     el.innerHTML = `<div class="empty">સાપ્તાહિક આયોજન હજી પ્રકાશિત થયું નથી.</div>`;
     return;
   }
-  const featured = featuredWeek();
-  const files = groupFiles(featured);
-  el.innerHTML = `
+  el.innerHTML = WEEKS.map(wk => {
+    const files = groupFiles(wk);
+    return `
     <div class="week-banner">
-      <h2>સપ્તાહ ${toGu(featured.week)} — ${esc(featured.title_gu || '')}</h2>
-      <div class="dates">${guDate(featured.start_date)} — ${guDate(featured.end_date)}</div>
-      ${isCurrentWeek(featured) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
+      <h2>સપ્તાહ ${toGu(wk.week)} — ${esc(wk.title_gu || '')}</h2>
+      <div class="dates">${guDate(wk.start_date)} — ${guDate(wk.end_date)}</div>
+      ${isCurrentWeek(wk) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
       <div class="downloads">${files.length ? fileLinks(files) : '<span style="font-size:0.85rem;opacity:0.85;">આ જૂથ માટે ફાઈલો હજી ઉપલબ્ધ નથી.</span>'}</div>
     </div>`;
+  }).join("");
 }
 
 (async function init() {
@@ -216,8 +207,6 @@ function renderList() {
   ]);
   WEEKS.sort((a, b) => b.week - a.week); // newest first
   if (CONFIG.school.name_gu) document.getElementById('schoolName').textContent = CONFIG.school.name_gu;
-  const sub = [CONFIG.school.city_gu, CONFIG.school.session_gu, 'સાપ્તાહિક પ્રવૃત્તિ'].filter(Boolean).join(" — ");
-  if (sub) document.getElementById('schoolSub').textContent = sub;
   if (!CONFIG.groups.some(g => g.id === activeGroup) && CONFIG.groups.length) {
     activeGroup = CONFIG.groups[0].id;
   }
