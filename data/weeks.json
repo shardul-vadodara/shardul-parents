@@ -101,6 +101,14 @@
     "end_date": "2026-08-02",
     "title_gu": "ગુરુ પૂર્ણિમા — ગુરુ-શિષ્ય પરંપરા અને શ્રાવણ પ્રારંભ",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week7_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
           {
