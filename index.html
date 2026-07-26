@@ -154,13 +154,21 @@ function isFutureWeek(w) {
   return new Date(w.start_date + "T00:00:00") > new Date();
 }
 
-// The week featured on top: current week, else the latest already-started,
-// else the earliest published (all-future edge case).
-function featuredWeek() {
-  const cur = WEEKS.find(isCurrentWeek);
-  if (cur) return cur;
-  const started = WEEKS.find(w => !isFutureWeek(w));
-  return started || WEEKS[WEEKS.length - 1];
+// The week to center the display on: current week, else the latest
+// already-started week, else the earliest published (all-future edge case).
+function anchorIndex() {
+  const cur = WEEKS.findIndex(isCurrentWeek);
+  if (cur >= 0) return cur;
+  for (let i = WEEKS.length - 1; i >= 0; i--) {
+    if (!isFutureWeek(WEEKS[i])) return i;
+  }
+  return 0;
+}
+
+// Past week, current week, next week (whichever of those are published).
+function windowedWeeks() {
+  const anchor = anchorIndex();
+  return WEEKS.slice(Math.max(0, anchor - 1), anchor + 2);
 }
 
 function renderGroupSwitch() {
@@ -197,15 +205,16 @@ function renderList() {
     el.innerHTML = `<div class="empty">સાપ્તાહિક આયોજન હજી પ્રકાશિત થયું નથી.</div>`;
     return;
   }
-  const featured = featuredWeek();
-  const files = groupFiles(featured);
-  el.innerHTML = `
+  el.innerHTML = windowedWeeks().map(wk => {
+    const files = groupFiles(wk);
+    return `
     <div class="week-banner">
-      <h2>સપ્તાહ ${toGu(featured.week)} — ${esc(featured.title_gu || '')}</h2>
-      <div class="dates">${guDate(featured.start_date)} — ${guDate(featured.end_date)}</div>
-      ${isCurrentWeek(featured) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
+      <h2>સપ્તાહ ${toGu(wk.week)} — ${esc(wk.title_gu || '')}</h2>
+      <div class="dates">${guDate(wk.start_date)} — ${guDate(wk.end_date)}</div>
+      ${isCurrentWeek(wk) ? '<span class="current-tag">ચાલુ સપ્તાહ</span>' : ''}
       <div class="downloads">${files.length ? fileLinks(files) : '<span style="font-size:0.85rem;opacity:0.85;">આ જૂથ માટે ફાઈલો હજી ઉપલબ્ધ નથી.</span>'}</div>
     </div>`;
+  }).join("");
 }
 
 (async function init() {
@@ -213,7 +222,7 @@ function renderList() {
     loadJson('data/config.json', { school: {}, groups: [] }),
     loadJson('data/weeks.json', [])
   ]);
-  WEEKS.sort((a, b) => b.week - a.week); // newest first
+  WEEKS.sort((a, b) => a.week - b.week); // oldest first, for windowing around the current week
   if (CONFIG.school.name_gu) document.getElementById('schoolName').textContent = CONFIG.school.name_gu;
   const sub = [CONFIG.school.city_gu, CONFIG.school.session_gu, 'સાપ્તાહિક પ્રવૃત્તિ'].filter(Boolean).join(" — ");
   if (sub) document.getElementById('schoolSub').textContent = sub;
