@@ -133,8 +133,20 @@
     "end_date": "2026-08-09",
     "title_gu": "શારીરિક સંતુલન ચાલ",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week8_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week8_savaj_kesari.pdf"
+          },
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week8_savaj_kesari.png"
