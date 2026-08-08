@@ -163,8 +163,16 @@
     "week": 9,
     "start_date": "2026-08-10",
     "end_date": "2026-08-16",
-    "title_gu": "રક્ષાબંધન પર્વ તૈયારી",
+    "title_gu": "હિંડોળા ઉત્સવ અને સ્વાતંત્ર્ય દિન — હરિયાળી અને સ્વતંત્રતાનો સંગમ",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week9_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
           {
