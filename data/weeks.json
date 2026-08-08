@@ -99,7 +99,7 @@
     "week": 7,
     "start_date": "2026-07-27",
     "end_date": "2026-08-02",
-    "title_gu": "ગુરુ પૂર્ણિમા — ગુરુ-શિષ્ય પરંપરા અને શ્રાવણ પ્રારંભ",
+    "title_gu": "ધ્વનિ અને શ્રવણ શક્તિ વિકાસ",
     "groups": {
       "mrigendra_pundarik": {
         "files": [
@@ -154,6 +154,22 @@
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week8_savaj_kesari.png"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "week": 9,
+    "start_date": "2026-08-10",
+    "end_date": "2026-08-16",
+    "title_gu": "રક્ષાબંધન પર્વ તૈયારી",
+    "groups": {
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week9_savaj_kesari.png"
           }
         ]
       }
