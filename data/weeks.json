@@ -195,8 +195,16 @@
     "week": 10,
     "start_date": "2026-08-17",
     "end_date": "2026-08-23",
-    "title_gu": "રક્ષાબંધન અને સામાજિક પરિચય",
+    "title_gu": "શ્રાવણ સોમવાર, મંગળા ગૌરી અને ઝૂલન યાત્રા-પ્રારંભ — ભક્તિ અને વર્ષાનો સંગમ",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week10_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
           {
