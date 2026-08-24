@@ -222,5 +222,21 @@
         ]
       }
     }
+  },
+  {
+    "week": 11,
+    "start_date": "2026-08-24",
+    "end_date": "2026-08-30",
+    "title_gu": "શ્રી કૃષ્ણ જન્માષ્ટમી મહોત્સવ",
+    "groups": {
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week11_savaj_kesari.png"
+          }
+        ]
+      }
+    }
   }
 ]
