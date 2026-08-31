@@ -195,7 +195,7 @@
     "week": 10,
     "start_date": "2026-08-17",
     "end_date": "2026-08-23",
-    "title_gu": "શ્રાવણ સોમવાર, મંગળા ગૌરી વ્રત પ્રારંભ — ભક્તિ અને વર્ષાનો સંગમ",
+    "title_gu": "રક્ષાબંધન અને સામાજિક પરિચય",
     "groups": {
       "mrigendra_pundarik": {
         "files": [
@@ -250,6 +250,26 @@
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week11_savaj_kesari.png"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "week": 12,
+    "start_date": "2026-08-31",
+    "end_date": "2026-09-06",
+    "title_gu": "ગણેશોત્સવ પૂર્વતૈયારી",
+    "groups": {
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week12_savaj_kesari.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week12_savaj_kesari.png"
           }
         ]
       }
