@@ -259,8 +259,16 @@
     "week": 12,
     "start_date": "2026-08-31",
     "end_date": "2026-09-06",
-    "title_gu": "ગણેશોત્સવ પૂર્વતૈયારી",
+    "title_gu": "ગૌ-પ્રકૃતિ પર્વોથી કાનુડાના જન્મોત્સવ અને ગુરુ-વંદના સુધી",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week12_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
           {
