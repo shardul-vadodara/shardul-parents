@@ -291,10 +291,26 @@
     "week": 13,
     "start_date": "2026-09-07",
     "end_date": "2026-09-13",
-    "title_gu": "ગણેશ પરિક્રમા નાટક",
+    "title_gu": "સંયમ, ક્ષમા અને ચંદ્ર-ચક્રનું સપ્તાહ",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week13_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week13_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week13_savaj_kesari.pdf"
+          },
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week13_savaj_kesari.png"
