@@ -227,7 +227,7 @@
     "week": 11,
     "start_date": "2026-08-24",
     "end_date": "2026-08-30",
-    "title_gu": "શ્રાવણનું ચોમાસુ: રક્ષા, ભક્તિ અને સંસ્કૃતિનું સપ્તાહ",
+    "title_gu": "શ્રી કૃષ્ણ જન્માષ્ટમી મહોત્સવ",
     "groups": {
       "mrigendra_pundarik": {
         "files": [
@@ -264,6 +264,10 @@
       "mrigendra_pundarik": {
         "files": [
           {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week12_mrigendra_pundarik.pdf"
+          },
+          {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week12_mrigendra_pundarik.png"
           }
@@ -278,6 +282,22 @@
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week12_savaj_kesari.png"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "week": 13,
+    "start_date": "2026-09-07",
+    "end_date": "2026-09-13",
+    "title_gu": "ગણેશ પરિક્રમા નાટક",
+    "groups": {
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week13_savaj_kesari.png"
           }
         ]
       }
