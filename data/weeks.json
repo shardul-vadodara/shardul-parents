@@ -350,5 +350,21 @@
         ]
       }
     }
+  },
+  {
+    "week": 15,
+    "start_date": "2026-09-21",
+    "end_date": "2026-09-27",
+    "title_gu": "ખેલકૂદ ક્ષમતા (દોડવું)",
+    "groups": {
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week15_savaj_kesari.png"
+          }
+        ]
+      }
+    }
   }
 ]
