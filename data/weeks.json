@@ -387,10 +387,26 @@
     "week": 16,
     "start_date": "2026-09-28",
     "end_date": "2026-10-04",
-    "title_gu": "નાટક અને સંવાદ કલા",
+    "title_gu": "પિતૃપક્ષ કૃતજ્ઞતા અને ગાંધી જયંતી સંસ્કાર",
     "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week16_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week16_mrigendra_pundarik.png"
+          }
+        ]
+      },
       "savaj_kesari": {
         "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week16_savaj_kesari.pdf"
+          },
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week16_savaj_kesari.png"
