@@ -387,7 +387,7 @@
     "week": 16,
     "start_date": "2026-09-28",
     "end_date": "2026-10-04",
-    "title_gu": "પિતૃપક્ષ કૃતજ્ઞતા અને ગાંધી જયંતી સંસ્કાર",
+    "title_gu": "નાટક અને સંવાદ કલા",
     "groups": {
       "mrigendra_pundarik": {
         "files": [
@@ -410,6 +410,38 @@
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week16_savaj_kesari.png"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "week": 19,
+    "start_date": "2026-10-19",
+    "end_date": "2026-10-25",
+    "title_gu": "મહાનવમી-વિજયાદશમી, પાપાંકુશા એકાદશી અને શરદ પૂર્ણિમા: સિદ્ધિ-વિજય-શુદ્ધિની શરદ-સાધના યાત્રા",
+    "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week19_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week19_mrigendra_pundarik.png"
+          }
+        ]
+      },
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week19_savaj_kesari.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week19_savaj_kesari.png"
           }
         ]
       }
