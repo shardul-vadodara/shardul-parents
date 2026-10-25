@@ -419,7 +419,7 @@
     "week": 19,
     "start_date": "2026-10-19",
     "end_date": "2026-10-25",
-    "title_gu": "મહાનવમી-વિજયાદશમી, પાપાંકુશા એકાદશી અને શરદ પૂર્ણિમા: સિદ્ધિ-વિજય-શુદ્ધિની શરદ-સાધના યાત્રા",
+    "title_gu": "દિવાળી પર્વ અને રંગોળી કલા",
     "groups": {
       "mrigendra_pundarik": {
         "files": [
@@ -442,6 +442,38 @@
           {
             "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
             "path": "files/week19_savaj_kesari.png"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "week": 20,
+    "start_date": "2026-10-26",
+    "end_date": "2026-11-01",
+    "title_gu": "શરદ પૂનમની શાંતિ, ગણેશની વિઘ્નહર્તા શક્તિ અને સરદારની રાષ્ટ્ર-એકતા: સંકલ્પ-સાધનાની સપ્તાહ-યાત્રા",
+    "groups": {
+      "mrigendra_pundarik": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week20_mrigendra_pundarik.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week20_mrigendra_pundarik.png"
+          }
+        ]
+      },
+      "savaj_kesari": {
+        "files": [
+          {
+            "label_gu": "માર્ગદર્શિકા PDF",
+            "path": "files/week20_savaj_kesari.pdf"
+          },
+          {
+            "label_gu": "માર્ગદર્શિકા ચિત્ર (PNG)",
+            "path": "files/week20_savaj_kesari.png"
           }
         ]
       }
